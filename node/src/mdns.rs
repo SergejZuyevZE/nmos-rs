@@ -179,7 +179,7 @@ impl MdnsContext {
     pub fn new(_config: &NmosMdnsConfig, tx: mpsc::UnboundedSender<NmosMdnsEvent>) -> MdnsContext {
         // Create registration browser
         let mut register_browser =
-            MdnsBrowser::new(ServiceType::new("nmos-register", "tcp").unwrap());
+            MdnsBrowser::new(ServiceType::new("nmos-registration", "tcp").unwrap());
 
         register_browser.set_context(Box::new(tx.clone()));
         register_browser.set_service_discovered_callback(Box::new(|r, c| {
