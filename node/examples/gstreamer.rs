@@ -67,7 +67,7 @@ fn create_node() -> Node {
         &flow,
         resource::Transport::RtpUnicast,
     )
-    .manifest("file:///path/to/sdp/file")
+    .manifest("file:///media/SDP.txt")
     .build();
 
     let mut bundle = resource::ResourceBundle::new();

@@ -22,6 +22,7 @@ pub use error::Error as NmosError;
 
 use api::{NodeApi, RegistrationApi};
 use mdns::{NmosMdnsConfig, NmosMdnsEvent, NmosMdnsRegistry};
+use reqwest::header::{HeaderMap, HeaderValue, CONTENT_LENGTH};
 
 #[derive(Default)]
 #[must_use]
@@ -175,14 +176,19 @@ impl Node {
                     let base = &registry.url.join("v1.0/").unwrap();
                     base.join(&format!("health/nodes/{}", node_id)).unwrap()
                 };
-
+                
+                let mut headers = HeaderMap::new();
+                headers.insert(CONTENT_LENGTH, HeaderValue::from_static("0"));
                 // Send heartbeat every 5 seconds
                 loop {
-                    match client.post(heartbeat_url.clone()).send().await {
+                    match client.post(heartbeat_url.clone()).headers(headers.clone()).send().await {
                         Ok(res) => {
                             if !res.status().is_success() {
-                                error!("Heartbeat error");
+                                error!("Heartbeat error for {}", heartbeat_url.clone());
                                 break;
+                            }
+                            else {
+                                info!("Heartbeat OK");
                             }
                         }
                         Err(err) => {

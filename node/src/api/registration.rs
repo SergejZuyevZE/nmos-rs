@@ -29,7 +29,7 @@ impl RegistrationApi {
         };
         let post_request = RegistrationapiResourcePostRequest::Variant0(node_post_request);
 
-        client.post(url.clone()).json(&post_request).send().await?;
+        client.post(url.clone()).json(&post_request).send().await?.error_for_status()?;
 
         Ok(())
     }
@@ -51,7 +51,7 @@ impl RegistrationApi {
         };
         let post_request = RegistrationapiResourcePostRequest::Variant1(device_post_request);
 
-        client.post(url.clone()).json(&post_request).send().await?;
+        client.post(url.clone()).json(&post_request).send().await?.error_for_status()?;
 
         Ok(())
     }
@@ -73,7 +73,7 @@ impl RegistrationApi {
         };
         let post_request = RegistrationapiResourcePostRequest::Variant4(source_post_request);
 
-        client.post(url.clone()).json(&post_request).send().await?;
+        client.post(url.clone()).json(&post_request).send().await?.error_for_status()?;
 
         Ok(())
     }
@@ -95,7 +95,7 @@ impl RegistrationApi {
         };
         let post_request = RegistrationapiResourcePostRequest::Variant5(flow_post_request);
 
-        client.post(url.clone()).json(&post_request).send().await?;
+        client.post(url.clone()).json(&post_request).send().await?.error_for_status()?;
 
         Ok(())
     }
@@ -117,7 +117,7 @@ impl RegistrationApi {
         };
         let post_request = RegistrationapiResourcePostRequest::Variant2(sender_post_request);
 
-        client.post(url.clone()).json(&post_request).send().await?;
+        client.post(url.clone()).json(&post_request).send().await?.error_for_status()?;
 
         Ok(())
     }
@@ -139,7 +139,7 @@ impl RegistrationApi {
         };
         let post_request = RegistrationapiResourcePostRequest::Variant3(receiver_post_request);
 
-        client.post(url.clone()).json(&post_request).send().await?;
+        client.post(url.clone()).json(&post_request).send().await?.error_for_status()?;
 
         Ok(())
     }
